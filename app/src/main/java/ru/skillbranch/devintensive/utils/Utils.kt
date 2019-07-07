@@ -1,22 +1,47 @@
 package ru.skillbranch.devintensive.utils
 
+import android.provider.SyncStateContract
+
 object Utils{
-    fun parseFullName(fullName:String?): Pair<String, String> {
+    fun parseFullName(fullName:String?): Pair<String?, String?> {
         val strFullName = fullName?.trim()?.ifEmpty { null }
         val parts :List<String>? = strFullName?.split(" ")
 
-        val firstName = parts?.getOrNull(0)?:"null"
-        val lastName = parts?.getOrNull(1)?:"null"
+        val firstName = parts?.getOrNull(0)?:null
+        val lastName = parts?.getOrNull(1)?:null
 
         return firstName to lastName
     }
 
     fun transliteration(payload:String, devider:String = " "):String{
-        return ""
+        var result=""
+
+        for(c in payload){
+            val symbol = c.toString()
+            val isUpper = c.isUpperCase()
+
+            if(symbol?.trim()?.isBlank()){
+                result += devider
+            }else if(symbol?.toLowerCase() in transliterationMap){
+                var transpilledSymbol = transliterationMap?.getValue(symbol.toLowerCase())
+                result+= (if(isUpper) transpilledSymbol?.capitalize() else transpilledSymbol)
+            }else{
+                result+=symbol
+            }
+
+        }
+
+        return result
     }
 
-    fun toInitials(firstName:String?, lastName:String?): String{
-        return ""
+    private fun getFirstLetter(str:String?)= str?.trim()?.take(1)?.toUpperCase()?:""
+
+    fun toInitials(firstName:String?, lastName:String?): String? {
+        if((firstName is String && firstName?.trim().isNotEmpty())
+            || (lastName is String && lastName?.trim().isNotEmpty())){
+            return getFirstLetter(firstName) + getFirstLetter(lastName)
+        }
+        return null
     }
 
     fun plurarizeTime(value: Int, pluralForms:String):String{
