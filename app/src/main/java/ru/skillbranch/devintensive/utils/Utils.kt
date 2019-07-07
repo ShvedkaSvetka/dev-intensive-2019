@@ -10,4 +10,12 @@ object Utils{
 
         return firstName to lastName
     }
+
+    fun transliteration(payload:String, devider:String = " "):String{
+        return ""
+    }
+
+    fun toInitials(firstName:String?, lastName:String?): String{
+        return ""
+    }
 }
