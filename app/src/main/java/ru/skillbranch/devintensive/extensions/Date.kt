@@ -15,9 +15,11 @@ const val MINUTE = 60* SECOND
 const val HOUR = 60* MINUTE
 const val DAY = 24* HOUR
 
+const val PLURAL_SECONDS="секунду;секунды;секунд"
 const val PLURAL_MINUTES="минуту;минуты;минут"
 const val PLURAL_HOURS="час;часа;часов"
 const val PLURAL_DAYS="день;дня;дней"
+
 
 fun Date.format(pattern: String="HH:mm:ss dd.MM.yy"):String{
     var dateFormat = SimpleDateFormat(pattern, Locale("ru"))
@@ -98,5 +100,15 @@ enum class TimeUnits{
     SECOND,
     MINUTE,
     HOUR,
-    DAY
+    DAY;
+
+    fun plural(i: Int): String {
+    val type = this
+    return when(type){
+        SECOND-> "${plurarizeTime(i,PLURAL_SECONDS)}"
+        MINUTE->"${plurarizeTime(i, PLURAL_MINUTES)}"
+        HOUR->"${plurarizeTime(i, PLURAL_HOURS)}"
+        DAY->"${plurarizeTime(i, PLURAL_DAYS)}"
+    }
+    }
 }
