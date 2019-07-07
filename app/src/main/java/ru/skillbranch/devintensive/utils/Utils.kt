@@ -18,4 +18,17 @@ object Utils{
     fun toInitials(firstName:String?, lastName:String?): String{
         return ""
     }
+
+    fun plurarizeTime(value: Int, pluralForms:String):String{
+        val forms = pluralForms.split(";")
+
+        when(value % 10){
+            1 -> if(value % 100 != 11)
+               return  "$value ${forms[0]}"
+            in 2..4 -> if (value % 100 !in 12..14){
+                return "$value ${forms[1]}"
+            }
+        }
+        return "$value ${forms[2]}"
+    }
 }
