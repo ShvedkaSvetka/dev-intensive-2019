@@ -36,8 +36,6 @@ fun Date.add(value:Int, units:TimeUnits): Date{
         TimeUnits.MINUTE ->value* MINUTE
         TimeUnits.HOUR -> value* HOUR
         TimeUnits.DAY -> value* DAY
-
-        else -> throw IllegalStateException("invalid unit")
     }
 this.time = time
     return this
