@@ -35,7 +35,7 @@
             android:background="@color/color_primary"
             android:layout_marginTop="@dimen/spacing_normal_16">
         <EditText
-                android:id="@+id/txt_message"
+                android:id="@+id/et_message"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -50,6 +50,7 @@
         />
 
         <ImageView
+                android:id="@+id/iv_send"
                 android:layout_width="@dimen/button_size_medium"
                 android:layout_height="@dimen/button_height"
                 android:src="@drawable/ic_send_black_24dp"
