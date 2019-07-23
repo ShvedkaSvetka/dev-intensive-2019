@@ -31,8 +31,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         val status =  savedInstanceState?.getString("STATUS")?:Bender.Status.NORMAL.name
         val question = savedInstanceState?.getString("QUESTION")?:Bender.Question.NAME.name
+        val mistakes = savedInstanceState?.getString("MISTAKES")?.toInt()?:0
 
-        benderObj = Bender(Bender.Status.valueOf(status), Bender.Question.valueOf(question))
+        benderObj = Bender(Bender.Status.valueOf(status), Bender.Question.valueOf(question), mistakes)
 
         val (r,g,b) = benderObj.status.color
         benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
@@ -77,6 +78,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onSaveInstanceState(outState)
         outState?.putString("STATUS", benderObj.status.name)
         outState?.putString("QUESTION", benderObj.question.name)
+        outState?.putString("MISTAKES", benderObj.mistakes.toString())
+
         Log.d("M_MainActivity.kt", "onSaveInstanceState ${benderObj.status.name} ${benderObj.question.name}")
     }
 
