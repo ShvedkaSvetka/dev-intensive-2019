@@ -11,7 +11,7 @@
     <dimen name="spacing_small_8">8dp</dimen>
     <dimen name="spacing_tiny_4">4dp</dimen>
     <!-- -->
-    <dimen name="button_size_x_large">112dp</dimen>
+    <dimen name="button_size_x_large">90dp</dimen>
     <dimen name="button_size_large">40dp</dimen>
     <dimen name="button_size_medium">34dp</dimen>
     <dimen name="button_height">34dp</dimen>
