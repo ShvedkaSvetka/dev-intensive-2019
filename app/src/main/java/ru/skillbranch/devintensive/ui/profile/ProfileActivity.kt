@@ -87,9 +87,11 @@ class ProfileActivity : AppCompatActivity() {
         )
 
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false)?: false
+        showCurrentMode(isEditMode)
+
         btn_edit.setOnClickListener {
-            if(isEditMode)saveProfileData()
-            isEditMode = isEditMode.not()
+            if(isEditMode) saveProfileData()
+            isEditMode = !isEditMode
             showCurrentMode(isEditMode)
         }
     }
@@ -133,7 +135,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun initViewModel(){
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        viewModel.getProfileDate().observe(this, Observer { updateUI(it) })
+        viewModel.getProfileData().observe(this, Observer { updateUI(it) })
     }
 
     private fun updateUI(profile: Profile) {
@@ -151,7 +153,7 @@ class ProfileActivity : AppCompatActivity() {
             about = et_about.text.toString(),
             repository = et_repository.text.toString()
         ).apply {
-            viewModel.saveProfileDate(this )
+            viewModel.saveProfileData(this )
         }
     }
 
