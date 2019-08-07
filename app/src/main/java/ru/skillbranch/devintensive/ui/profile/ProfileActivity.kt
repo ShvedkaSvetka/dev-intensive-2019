@@ -26,6 +26,9 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var viewFields: Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //todo update theme
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         Log.d("M_MainActivity.kt", "onCreate")
@@ -94,6 +97,10 @@ class ProfileActivity : AppCompatActivity() {
             isEditMode = !isEditMode
             showCurrentMode(isEditMode)
         }
+
+        btn_switch_theme.setOnClickListener{
+            viewModel.switchTheme()
+        }
     }
 
     private fun showCurrentMode(isEdit: Boolean) {
@@ -121,10 +128,10 @@ class ProfileActivity : AppCompatActivity() {
             }
 
             val icon = if (isEdit) {
-                resources.getDrawable(R.drawable.ic_save_black_24dp)
+                resources.getDrawable(R.drawable.ic_save_black_24dp, theme)
             } else {
                 resources.getDrawable(
-                    R.drawable.ic_edit_black_24dp
+                    R.drawable.ic_edit_black_24dp, theme
                 )
             }
 
@@ -136,6 +143,13 @@ class ProfileActivity : AppCompatActivity() {
     private fun initViewModel(){
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer { updateUI(it) })
+        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+    }
+
+    private fun updateTheme(mode: Int) {
+        Log.d("M_ProfileActivity.kt", "update theme")
+        delegate.setLocalNightMode(mode)
+
     }
 
     private fun updateUI(profile: Profile) {
