@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
 import android.provider.SyncStateContract
+import android.webkit.URLUtil
 
 object Utils{
     fun parseFullName(fullName:String?): Pair<String?, String?> {
@@ -55,5 +56,11 @@ object Utils{
             }
         }
         return "$value ${forms[2]}"
+    }
+
+    fun isValidUrl(url: String): Boolean {
+        val constraints = urlConstrains.joinToString("|")
+        val pattern = Regex("""^(https://)?(www\.)?github\.com/(?!($constraints)/?$)[\-\w]+/?$""")
+        return url.isNullOrBlank() || pattern.matches(url)
     }
 }

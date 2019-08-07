@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Ripple effect for material button -->
-<ripple
-        xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/color_accent">
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="?attr/colorDivider">
     <item android:id="@android:id/mask">
         <shape android:shape="oval">
-            <solid android:color="@color/color_accent"></solid>
+            <solid android:color="@color/color_accent_secondary"/>
         </shape>
     </item>
     <item android:id="@android:id/background">
         <shape android:shape="oval">
-            <solid android:color="?attr/colorBackgroundFloating"></solid>
+            <solid android:color="?attr/colorBackgroundFloating"/>
         </shape>
     </item>
+
 </ripple>
